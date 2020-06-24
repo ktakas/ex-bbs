@@ -8,11 +8,11 @@
   <div class="article-form">
     <form action="index.html" th:action="@{/article/insert}" th:object="${articleForm}" method="POST">
       <div class="article-form-name">
-        <label for="article-author-name">投稿者名</label>
+        <label for="article-author-name">投稿者名: </label>
         <input type="text" id="article-author-name" name="name" th:field="*{name}">
       </div>
       <div class="article-form-content">
-        <label for="article-content">投稿内容</label>
+        <label for="article-content">投稿内容: </label>
         <textarea rows="3" cols="30" id="article-content" name="content" th:field="*{content}"></textarea>
       </div>
       <button type="submit">記事投稿</button>
@@ -41,12 +41,12 @@
   	<form action="index.html" th:action="@{/comment/insert}" th:object="${commentForm}" method="POST">
 	  <input type="hidden" name="articleId" th:value="${article.id}">
 	  <div class="comment-form-name">
-	    <label for="comment-name">名前: </label><br>
-        <input type="text" id="content-name" name="name" th:field="*{name}">
+	    <label th:for="'comment-name' + ${article.id}">名前: </label><br>
+        <input type="text" th:id="'comment-name' + ${article.id}" name="name" th:field="*{name}">
       </div>
       <div class="comment-form-content">
-        <label for="comment-content">コメント: </label><br>
-        <textarea rows="3" cols="30" id="content-content" name="content" th:field="*{content}"></textarea>
+        <label th:for="'comment-content-' + ${article.id}">コメント: </label><br>
+        <textarea rows="3" cols="30" th:id="'comment-content-' + ${article.id}" name="content" th:field="*{content}"></textarea>
       </div>
       <button type="submit">コメント投稿</button>
     </form>

@@ -40,7 +40,6 @@ public class ArticleController {
 		article.setCommentList(emptyCommentList);
 		
 		articleServ.insert(article);
-		System.out.println("OK");
 		return "redirect:/";
 	}
 	

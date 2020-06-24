@@ -49,7 +49,7 @@ public class CommentRepository {
 				"WHERE\r\n" + 
 				"  article_id = :articleId\r\n" + 
 				"ORDER BY\r\n" + 
-				"  id ASC\r\n" + 
+				"  id DESC\r\n" + 
 				";";
 		SqlParameterSource param = new MapSqlParameterSource()
 										.addValue("articleId", articleId);
@@ -73,7 +73,7 @@ public class CommentRepository {
 									.addValue("content", comment.getContent())
 									.addValue("articleId", comment.getArticleId());
 		int insNum = template.update(sql, param);
-		System.out.println(insNum + "件のデータを挿入しました");
+		System.out.println(insNum + "件のコメントを挿入しました");
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class CommentRepository {
 		SqlParameterSource param = new MapSqlParameterSource()
 										.addValue("articleId", articleId);
 		int delNum = template.update(sql, param);
-		System.out.println(delNum + "件のデータを削除しました");
+		System.out.println(delNum + "件のコメントを削除しました");
 	}
 	
 }

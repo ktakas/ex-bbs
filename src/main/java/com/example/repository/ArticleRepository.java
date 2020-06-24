@@ -79,7 +79,7 @@ public class ArticleRepository {
 										.addValue("name", article.getName())
 										.addValue("content", article.getContent());
 		int insNum = template.update(sql, param);
-		System.out.println(insNum + "件のデータを挿入しました");
+		System.out.println(insNum + "件の記事を挿入しました");
 	}
 	
 	/**
@@ -97,6 +97,6 @@ public class ArticleRepository {
 		SqlParameterSource param = new MapSqlParameterSource()
 										.addValue("id", id);
 		int delNum = template.update(sql, param);
-		System.out.println(delNum + "件のデータを削除しました");
+		System.out.println(delNum + "件の記事を削除しました");
 	}
 }
