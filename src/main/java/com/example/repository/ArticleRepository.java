@@ -41,16 +41,19 @@ public class ArticleRepository {
 	};
 	
 	/**
-	 * 記事を全件取得する.
+	 * 記事をIDの降順で全件取得する.
 	 * 
 	 * @return すべての記事のリスト
 	 */
 	public List<Article> findAll() {
-		String sql = "DELETE\r\n" + 
+		String sql = "SELECT\r\n" + 
+				"  id\r\n" + 
+				", name\r\n" + 
+				", content\r\n" + 
 				"FROM\r\n" + 
-				"  comments\r\n" + 
-				"WHERE\r\n" + 
-				"  article_id = :articleId\r\n" + 
+				"  articles\r\n" + 
+				"ORDER BY\r\n" + 
+				"  id DESC\r\n" + 
 				";";
 		List<Article> articleList = template.query(sql, ARTICLE_ROW_MAPPER);
 		for(Article article: articleList) {
@@ -70,7 +73,7 @@ public class ArticleRepository {
 		String sql = "INSERT INTO\r\n" + 
 				"  articles(name, content)\r\n" + 
 				"VALUES\r\n" + 
-				"  (name, :content)\r\n" + 
+				"  (:name, :content)\r\n" + 
 				";";
 		SqlParameterSource param = new MapSqlParameterSource()
 										.addValue("name", article.getName())
@@ -80,7 +83,7 @@ public class ArticleRepository {
 	}
 	
 	/**
-	 * 引数のIDと一致する記事を削除する.
+	 * 引数のIDと一致する記事と記事のコメントをすべて削除する.
 	 * 
 	 * @param id ID
 	 */

@@ -5,6 +5,51 @@
 <title>掲示板システム</title>
 </head>
 <body>
-  <p>placeholder</p>
+  <div class="article-form">
+    <form action="index.html" th:action="@{/article/insert}" th:object="${articleForm}" method="POST">
+      <div class="article-form-name">
+        <label for="article-author-name">投稿者名</label>
+        <input type="text" id="article-author-name" name="name" th:field="*{name}">
+      </div>
+      <div class="article-form-content">
+        <label for="article-content">投稿内容</label>
+        <textarea rows="3" cols="30" id="article-content" name="content" th:field="*{content}"></textarea>
+      </div>
+      <button type="submit">記事投稿</button>
+    </form>
+  </div>
+  
+  <div class="contents" th:each="article: ${articleList}">
+ 	<hr>
+  	<p>投稿者名: <span th:text="${article.name}"></span></p>
+  	<p>投稿内容: </p>
+  	<pre th:text="${article.content}"></pre>
+  	
+  	<form action="index.html" th:action="@{/article/delete}" method="POST">
+      <input type="hidden" name="articleId" th:value="${article.id}">
+      <button type="submit">記事削除</button>
+  	</form>
+  	
+  	<br>
+  	
+  	<div class="article-comments" th:each="comment: ${article.commentList}">
+  	  <p>コメント者名: <span th:text="${comment.name}"></span>さん</p>
+  	  <p>コメント内容: </p>
+  	  <pre th:text="${comment.content}"></pre><br>
+  	</div>
+  	
+  	<form action="index.html" th:action="@{/comment/insert}" th:object="${commentForm}" method="POST">
+	  <input type="hidden" name="articleId" th:value="${article.id}">
+	  <div class="comment-form-name">
+	    <label for="comment-name">名前: </label><br>
+        <input type="text" id="content-name" name="name" th:field="*{name}">
+      </div>
+      <div class="comment-form-content">
+        <label for="comment-content">コメント: </label><br>
+        <textarea rows="3" cols="30" id="content-content" name="content" th:field="*{content}"></textarea>
+      </div>
+      <button type="submit">コメント投稿</button>
+    </form>
+  </div>
 </body>
 </html>

@@ -22,6 +22,9 @@ public class ArticleService {
 	@Autowired
 	private ArticleRepository repository;
 	
+	@Autowired
+	private CommentService commentServ;
+	
 	/**
 	 * 全件検索を行う.
 	 * 
@@ -46,6 +49,7 @@ public class ArticleService {
 	 * @param id 記事のID
 	 */
 	public void deleteById(int id) {
+		commentServ.deleteByArticleId(id);
 		repository.deleteById(id);
 	}
 }

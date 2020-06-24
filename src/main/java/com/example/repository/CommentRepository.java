@@ -33,7 +33,7 @@ public class CommentRepository {
 	};
 	
 	/**
-	 * 指定した記事のIDと一致するコメントをすべて取得する.
+	 * 指定した記事のIDと一致するコメントをIDの降順ですべて取得する.
 	 * 
 	 * @param articleId 記事のID
 	 * @return 記事IDと一致するコメント情報のリスト
@@ -48,6 +48,8 @@ public class CommentRepository {
 				"  comments\r\n" + 
 				"WHERE\r\n" + 
 				"  article_id = :articleId\r\n" + 
+				"ORDER BY\r\n" + 
+				"  id ASC\r\n" + 
 				";";
 		SqlParameterSource param = new MapSqlParameterSource()
 										.addValue("articleId", articleId);
